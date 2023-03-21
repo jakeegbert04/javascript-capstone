@@ -1,31 +1,31 @@
-// async function fetchUrl() {
-//   try{
-//    const responce = await fetch("MOCK_DATA.json", {
-
-//    })
-//    .then(res => res.json())
-//    return exam
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
+function fetchUrl() {
+  try{
+   const responce = fetch("MOCK_DAT.json", {})
+   .then(res => res.json())
+   console.log("DATA: ", responce)
+   return responce
+  } catch (error) {
+    console.error(error)
+  }
+}
 // console.log(fetchUrl())
-
-
 
 
 // async function renderuser
 
 
-fetch("MOCK_DATA.json",  {})
+// fetch("MOCK_DATA.json",  {})
 
-.then(res => res.json())
-.then(data => seperateNames(data))
-.catch(err => console.log(err))
+// .then(res => res.json())
+// .then(data => seperateNames(data))
+// .catch(err => console.log(err))
 
 
-function seperateNames(data) {
-  data.forEach(x => {
+async function seperateNames() {
+  const data = await fetchUrl()
+
+  console.log(data)
+  data?.forEach(x => {
     const firstName = x.first_name
     
     const lastName = x.last_name
@@ -40,6 +40,7 @@ function seperateNames(data) {
 function addToPage(fullName) {
   const users = document.getElementById("users-wrapper")
   const div = document.createElement("div")
+  const buttonDiv = document.createElement("div")
   const para = document.createElement("p")
   const names = document.createTextNode(fullName)
   const add = document.createTextNode("+")
@@ -53,17 +54,26 @@ para.appendChild(names)
 div.classList.add("all-users")
 users.appendChild(div)
 
-div.appendChild(button1)
+div.appendChild(buttonDiv)
+buttonDiv.appendChild(button1)
+buttonDiv.appendChild(button2)
 button1.appendChild(add)
-users.appendChild(div)
-
-div.appendChild(button2)
 button2.appendChild(minus)
 users.appendChild(div)
 
+
+
+// div.appendChild(button1)
+// button1.appendChild(add)
+// users.appendChild(div)
+
+// div.appendChild(button2)
+// button2.appendChild(minus)
+// users.appendChild(div)
+
 }
 
-// seperateNames(fetchUrl())
+seperateNames()
 
 
 

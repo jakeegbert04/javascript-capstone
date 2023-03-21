@@ -8,6 +8,7 @@
   background-color: rgb(213 211 213);
   color: rgb(237 235 237);
   gap: 2.5px;
+  overflow-y: scroll;
 
   .title {
     display: flex;
@@ -17,11 +18,22 @@
   }
   .users-wrapper {
     display: flex;
+    flex-direction: column;
     height: 90%;
     background-color: rgb(23 22 67);
+    justify-content: center;
+    align-items: center;
+    border: solid green 1px;
 
     .all-users {
-      // display: flex;
+      background-color: rgb(23 22 67);
+      display: flex;
+      flex-direction: column;
+      border:solid red 1px;
+
+      div {
+        display: flex;
+      }
     }
   }
 }
