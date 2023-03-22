@@ -1,81 +1,102 @@
 function fetchUrl() {
   try{
-   const responce = fetch("MOCK_DAT.json", {})
-   .then(res => res.json())
-   console.log("DATA: ", responce)
+   const responce = fetch("MOCK_DATA.json", {})
+   .then( res => res.json())
+  //  console.log("DATA: ", responce)
    return responce
   } catch (error) {
     console.error(error)
   }
 }
-// console.log(fetchUrl())
+console.log(fetchUrl())
+
+function usersArray(user) {
+  const userArray = []
+  for(let i = 0; i < user.length; i++) {
+    userArray.push(user)
+  
+  }
+  console.log(userArray)
+}
 
 
-// async function renderuser
 
-
-// fetch("MOCK_DATA.json",  {})
-
-// .then(res => res.json())
-// .then(data => seperateNames(data))
-// .catch(err => console.log(err))
-
-
-async function seperateNames() {
-  const data = await fetchUrl()
-
-  console.log(data)
-  data?.forEach(x => {
-    const firstName = x.first_name
-    
-    const lastName = x.last_name
-    
-    // console.log(firstName, lastName)
-    let fullName = (firstName[0].toUpperCase() + firstName.slice(1)+ ` ` + lastName[0].toUpperCase())
-    
-    addToPage(fullName)
-  })
+function capsName(firstName, lastName) {
+   return firstName[0].toUpperCase() + firstName.slice(1)+ ` ` + lastName[0].toUpperCase()
 }
 
 function addToPage(fullName) {
   const users = document.getElementById("users-wrapper")
-  const div = document.createElement("div")
+  const nameDiv = document.createElement("div")
   const buttonDiv = document.createElement("div")
-  const para = document.createElement("p")
-  const names = document.createTextNode(fullName)
+  const namePara = document.createElement("p")
+  const weightSpan = document.createElement("span")
+  const nameNode = document.createTextNode(`${fullName} : `)
+  const weightNum = document.createTextNode("1")
   const add = document.createTextNode("+")
   const minus = document.createTextNode("-")
-  const button1 = document.createElement("button")
-  const button2 = document.createElement("button")
+  const buttonAdd = document.createElement("button")
+  const buttonMinus = document.createElement("button")
   
-  
-div.appendChild(para)
-para.appendChild(names)
-div.classList.add("all-users")
-users.appendChild(div)
 
-div.appendChild(buttonDiv)
-buttonDiv.appendChild(button1)
-buttonDiv.appendChild(button2)
-button1.appendChild(add)
-button2.appendChild(minus)
-users.appendChild(div)
+
+  nameDiv.appendChild(namePara)
+  namePara.appendChild(nameNode)
+  namePara.append(weightSpan)
+  weightSpan.appendChild(weightNum)
+  nameDiv.classList.add("all-users")
+  users.appendChild(nameDiv)
 
 
 
-// div.appendChild(button1)
-// button1.appendChild(add)
-// users.appendChild(div)
-
-// div.appendChild(button2)
-// button2.appendChild(minus)
-// users.appendChild(div)
+  nameDiv.appendChild(buttonDiv)
+  buttonDiv.appendChild(buttonAdd)
+  buttonDiv.appendChild(buttonMinus)
+  buttonAdd.appendChild(add)
+  buttonMinus.appendChild(minus)
+  users.appendChild(nameDiv)
 
 }
 
-seperateNames()
+// function usersArray(users){
+//   const usersArray = []
+//   for(const i in users) {
+//     usersArray.push(users)
+//   }
+//   console.log(usersArray)
+// }
 
 
+// seperateNames()
+// Focus on driving logic
+//
+
+async function main() {
+  const data = await fetchUrl()
+  // const userFrag = new DocumentFragment();
+
+  data.forEach(user => {
+    // createElements
+    // create text nodes
+    const nameNode = (`${capsName(user.first_name, user.last_name)}`)
+    // console.log(nameNode)
+
+    addToPage(nameNode)
+    
+    // userFrag.appendChild(nameNode)
+    usersArray(nameNode)
+    // return nameNode
+  })
+
+  // parentEl.appendChild(userFrag)
+}
+
+main()
 
 
-
+// async main() -> control flow of app
+ // getData()
+ // queryDomElements
+ // createElements
+ // format elements -> separateNames(first, last) => formatted string : 
+ // appendElements

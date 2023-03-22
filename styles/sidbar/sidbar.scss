@@ -21,18 +21,33 @@
     flex-direction: column;
     height: 90%;
     background-color: rgb(23 22 67);
-    justify-content: center;
     align-items: center;
+    
     border: solid green 1px;
-
+    
     .all-users {
-      background-color: rgb(23 22 67);
       display: flex;
       flex-direction: column;
-      border:solid red 1px;
+      align-items: center;
+      // border:solid red 1px;
+      height: 100px;
+      width: 100%;
+      background-color: rgb(23 22 67);
 
-      div {
-        display: flex;
+      button {
+        background-color: red;
+        border: none;
+        outline: none;
+        margin: 0px 3px;
+
+        &:last-child {
+          background-color: green;
+          margin: 0px 3px;
+        }
+        &:hover {
+          cursor: pointer;
+
+        }
       }
     }
   }
