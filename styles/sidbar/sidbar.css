@@ -35,11 +35,11 @@
   background-color: red;
   border: none;
   outline: none;
-  margin: 0px 3px;
+  padding: 5px 10px;
+  margin: 0 3px;
 }
 .sidebar .users-wrapper .all-users button:last-child {
   background-color: green;
-  margin: 0px 3px;
 }
 .sidebar .users-wrapper .all-users button:hover {
   cursor: pointer;
