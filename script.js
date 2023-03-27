@@ -8,6 +8,7 @@ function fetchUrl() {
     console.error(error)
   }
 }
+const allUsers = []
 // console.log(fetchUrl())
 
 
@@ -27,7 +28,7 @@ function addToPage(fullName) {
   const minus = document.createTextNode("-")
   const buttonAdd = document.createElement("button")
   const buttonMinus = document.createElement("button")
-  const weight = document.createElement("span").innerHTML
+  
   
 
 
@@ -51,50 +52,56 @@ function addToPage(fullName) {
   users.appendChild(nameDiv)
   
   const allUsersDiv = document.getElementsByClassName("all-users")
-  // console.log(allUsersDiv)
+  
   const updateNum = buttonAdd.addEventListener("click", function(e) {
       e.target.parentElement.parentElement.firstChild.firstElementChild.innerText++
-      allUsers.forEach(user => {
-        user["weight"] ++
-      })
+      userArray.push(fullName)
+      console.log(userArray)
+      
     })
   const decreaseNum = buttonMinus.addEventListener("click", function(e) {
-    e.target.parentElement.parentElement.firstChild.firstElementChild.innerText--
-    allUsers.forEach(user => {
-      user["weight"] --
-    })
-  })
+    const weight = e.target.parentElement.previousElementSibling.querySelector("span").innerText
+    console.dir(e)
+    if(weight === "0"){
+      e.target.disabled = true
+    } else {
+      e.target.disabled = false
+      e.target.parentElement.parentElement.firstChild.firstElementChild.innerText--
+      
+      var index = userArray.indexOf(fullName);
+      if (index > -1) {
+      userArray.splice(index, 1);
+      console.log(userArray)
+      }
+    }
+   
     
   }
-  const userWeight = []
-  function weight() {
-    allUsers.forEach(user => {
-      const weight = document.querySelector("span").innerHTML
-      // userWeight.push(weight)
-      user["weight"] = weight
-      // console.log(userWeight)
-    })
-}
+)}
+const userArray =[]
+
+console.log(userArray)
 
 
 function seperateName() {
   allUsers.forEach(user => {
     const nameNode = (`${capsName(user.first_name, user.last_name)}`)
     addToPage(nameNode)
-
+    userArray.push(nameNode)
+    return nameNode
     // console.log(nameNode)
   })
     
     
 }
-const allUsers = []
+
 async function main() {
     const data = await fetchUrl()
     data.forEach(user => {
       allUsers.push(user)
     })
     seperateName(allUsers)
-    weight(allUsers)
+    // weight(allUsers)
     // console.log(allUsers)
 
 
