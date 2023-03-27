@@ -10,18 +10,6 @@ function fetchUrl() {
 }
 // console.log(fetchUrl())
 
-const userArray = []
-function usersArray(user) {
-  userArray.push(user)
-  // console.log(userArray)
-}
-
-// const data = fetch("MOCK_DATA.json", {})
-// .then(res => res.json())
-// // .then(data =>  console.log(data))
-// .catch(err => console.log(err))
-
-
 
 function capsName(firstName, lastName) {
    return firstName[0].toUpperCase() + firstName.slice(1)+ ` ` + lastName[0].toUpperCase()
@@ -29,7 +17,7 @@ function capsName(firstName, lastName) {
 
 function addToPage(fullName) {
   const nameNode = document.createTextNode(`${fullName} : `)
-  const weightNum = document.createTextNode("1")
+  const weightNum = document.createTextNode(1)
   const users = document.getElementById("users-wrapper")
   const nameDiv = document.createElement("div")
   const buttonDiv = document.createElement("div")
@@ -39,6 +27,7 @@ function addToPage(fullName) {
   const minus = document.createTextNode("-")
   const buttonAdd = document.createElement("button")
   const buttonMinus = document.createElement("button")
+  const weight = document.createElement("span").innerHTML
   
 
 
@@ -61,42 +50,53 @@ function addToPage(fullName) {
   buttonMinus.appendChild(minus)
   users.appendChild(nameDiv)
   
-  
-  // var updateButton = buttonAdd.addEventListener("click", function(e) {
-    //   e.target.parentElement.parentElement.firstChild.firstElementChild.innerText++
-    // })
+  const allUsersDiv = document.getElementsByClassName("all-users")
+  // console.log(allUsersDiv)
+  const updateNum = buttonAdd.addEventListener("click", function(e) {
+      e.target.parentElement.parentElement.firstChild.firstElementChild.innerText++
+      allUsers.forEach(user => {
+        user["weight"] ++
+      })
+    })
+  const decreaseNum = buttonMinus.addEventListener("click", function(e) {
+    e.target.parentElement.parentElement.firstChild.firstElementChild.innerText--
+    allUsers.forEach(user => {
+      user["weight"] --
+    })
+  })
     
   }
-  
-  function weight(user) {
-  const userWeight = document.querySelector("span")
-  userWeight.addEventListener("click", function(e) {
-    
-  })
-  user["weight"] = userWeight
-  console.log(user)
-    const updateWeight = user.weight = user.weight ++
+  const userWeight = []
+  function weight() {
+    allUsers.forEach(user => {
+      const weight = document.querySelector("span").innerHTML
+      // userWeight.push(weight)
+      user["weight"] = weight
+      // console.log(userWeight)
+    })
 }
 
 
-function seperateName(user) {
-    // createElements
-    // create text nodes
-    
+function seperateName() {
+  allUsers.forEach(user => {
     const nameNode = (`${capsName(user.first_name, user.last_name)}`)
-    console.log(nameNode)
-    
-    // addClick.addEventListener("click", updateWeight)
-    
     addToPage(nameNode)
-}
 
+    // console.log(nameNode)
+  })
+    
+    
+}
+const allUsers = []
 async function main() {
     const data = await fetchUrl()
     data.forEach(user => {
-      seperateName(user)
-      weight(user)
+      allUsers.push(user)
     })
+    seperateName(allUsers)
+    weight(allUsers)
+    // console.log(allUsers)
+
 
     // const userFrag = new DocumentFragment();
     // console.log(data)
