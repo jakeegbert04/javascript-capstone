@@ -12,6 +12,34 @@
 }
 .main-container .middle-section .display {
   font-size: 40px;
+  display: block;
+}
+.main-container .middle-section .loader {
+  display: none;
+  margin-bottom: 25px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 0.7s linear infinite;
+  animation: spin 0.7s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .main-container .middle-section .random-button button {
   padding: 30px 180px;

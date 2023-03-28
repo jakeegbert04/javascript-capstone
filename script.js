@@ -17,6 +17,8 @@ function capsName(firstName, lastName) {
    return firstName[0].toUpperCase() + firstName.slice(1)+ ` ` + lastName[0].toUpperCase()
 }
 
+let weightArray = []
+
 function addToPage(fullName) {
   const nameNode = document.createTextNode(`${fullName} : `)
   const weightNum = document.createTextNode(1)
@@ -30,6 +32,7 @@ function addToPage(fullName) {
   const buttonAdd = document.createElement("button")
   const buttonMinus = document.createElement("button")
   
+  weightArray = [...namesArray]
   
 
 
@@ -57,8 +60,8 @@ function addToPage(fullName) {
   const updateNum = buttonAdd.addEventListener("click", function(e) {
       e.target.parentElement.lastChild.disabled = false
       e.target.parentElement.parentElement.firstChild.firstElementChild.innerText++
-      userArray.push(fullName)
-      console.log(userArray) 
+      weightArray.push(fullName)
+      console.log(weightArray) 
     })
   const decreaseNum = buttonMinus.addEventListener("click", function(e) {
     const weight = e.target.parentElement.previousElementSibling.querySelector("span").innerText
@@ -69,10 +72,10 @@ function addToPage(fullName) {
       // e.target.disabled = false
       e.target.parentElement.parentElement.firstChild.firstElementChild.innerText--
       
-      const index = userArray.indexOf(fullName);
+      const index = weightArray.indexOf(fullName);
       if (index > -1) {
-      userArray.splice(index, 1);
-      console.log(userArray)
+      weightArray.splice(index, 1);
+      console.log(weightArray)
       }
     }
    
@@ -83,14 +86,16 @@ let userArray =[]
 
 // console.log(userArray)
 
-function randomName(){
+async function randomName(){
+  changeDisplay()
+  await timer()
   const randomIndex = Math.floor(Math.random() * userArray.length);
   const randomUser = userArray[randomIndex]
   const index = userArray.indexOf(randomUser);
 
   if(userArray.length === 1) {
-    userArray = [...namesArray]
-    console.log("hello")
+    userArray = [...weightArray]
+    // console.log("hello")
   } else {
     userArray.splice(index, 1);
   }
@@ -98,8 +103,25 @@ function randomName(){
   // console.log(index)
   console.log(userArray)
   console.log(randomUser)
-  
 }
+
+function changeDisplay() {
+  document.getElementsByClassName("display")[0].style.display = "none";
+  document.getElementsByClassName("loader")[0].style.display = "block";
+  // displayDiv.replaceWith(spinDiv)
+}
+
+function timer() {
+  console.log("starting slow promise");
+  return new Promise(resolve => {
+    setTimeout(function() {
+      resolve("slow");
+      console.log("slow promise is done");
+    }, 2000);
+  })
+}
+// changeDisplay()
+
 function seperateName() {
   allUsers.forEach(user => {
     const nameNode = (`${capsName(user.first_name, user.last_name)}`)
