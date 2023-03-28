@@ -1,6 +1,16 @@
+const login = {email: "jake@devpipeline.com",password: "little"}
+
 function fetchUrl() {
   try{
-   const responce = fetch("MOCK_DATA.json", {})
+   const responce = fetch("https://devpipeline-mock-api.onrender.com/api/auth/login", {
+    credentials: "same-origin",
+    method: "post",
+    body: JSON.stringify(login),
+    headers: {
+      "content-type" : "application/json"
+
+  }
+   })
    .then( res => res.json())
   //  console.log("DATA: ", responce)
    return responce
@@ -87,11 +97,15 @@ let userArray =[]
 // console.log(userArray)
 
 async function randomName(){
-  changeDisplay()
-  await timer()
   const randomIndex = Math.floor(Math.random() * userArray.length);
   const randomUser = userArray[randomIndex]
   const index = userArray.indexOf(randomUser);
+  const nameTextNone = document.createTextNode(randomUser)
+  removeDisplay()
+  await timer()
+  document.getElementsByClassName("display")[0].innerText = randomUser
+  addDisplay()
+  
 
   if(userArray.length === 1) {
     userArray = [...weightArray]
@@ -99,16 +113,21 @@ async function randomName(){
   } else {
     userArray.splice(index, 1);
   }
+  document.getElementsByClassName("display")
   // console.log(userArray.length)
   // console.log(index)
   console.log(userArray)
   console.log(randomUser)
 }
 
-function changeDisplay() {
+function removeDisplay() {
   document.getElementsByClassName("display")[0].style.display = "none";
   document.getElementsByClassName("loader")[0].style.display = "block";
   // displayDiv.replaceWith(spinDiv)
+}
+function addDisplay() {
+  document.getElementsByClassName("display")[0].style.display = "block";
+  document.getElementsByClassName("loader")[0].style.display = "none";
 }
 
 function timer() {
@@ -117,9 +136,10 @@ function timer() {
     setTimeout(function() {
       resolve("slow");
       console.log("slow promise is done");
-    }, 2000);
+    }, 1000);
   })
 }
+
 // changeDisplay()
 
 function seperateName() {
@@ -138,7 +158,8 @@ function seperateName() {
 
 async function main() {
   const data = await fetchUrl()
-  data.forEach(user => {
+  // console.log(data["users"])
+  data["users"].forEach(user => {
     allUsers.push(user)
   })
   seperateName(allUsers)

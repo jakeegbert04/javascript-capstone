@@ -9,9 +9,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 .main-container .middle-section .display {
-  font-size: 40px;
+  font-size: 80px;
   display: block;
 }
 .main-container .middle-section .loader {
