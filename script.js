@@ -9,6 +9,7 @@ function fetchUrl() {
   }
 }
 const allUsers = []
+const namesArray = []
 // console.log(fetchUrl())
 
 
@@ -54,21 +55,21 @@ function addToPage(fullName) {
   const allUsersDiv = document.getElementsByClassName("all-users")
   
   const updateNum = buttonAdd.addEventListener("click", function(e) {
+      e.target.parentElement.lastChild.disabled = false
       e.target.parentElement.parentElement.firstChild.firstElementChild.innerText++
       userArray.push(fullName)
-      console.log(userArray)
-      
+      console.log(userArray) 
     })
   const decreaseNum = buttonMinus.addEventListener("click", function(e) {
     const weight = e.target.parentElement.previousElementSibling.querySelector("span").innerText
-    console.dir(e)
+    console.dir(e.target)
     if(weight === "0"){
       e.target.disabled = true
     } else {
-      e.target.disabled = false
+      // e.target.disabled = false
       e.target.parentElement.parentElement.firstChild.firstElementChild.innerText--
       
-      var index = userArray.indexOf(fullName);
+      const index = userArray.indexOf(fullName);
       if (index > -1) {
       userArray.splice(index, 1);
       console.log(userArray)
@@ -78,51 +79,48 @@ function addToPage(fullName) {
     
   }
 )}
-const userArray =[]
+let userArray =[]
 
-console.log(userArray)
+// console.log(userArray)
 
+function randomName(){
+  const randomIndex = Math.floor(Math.random() * userArray.length);
+  const randomUser = userArray[randomIndex]
+  const index = userArray.indexOf(randomUser);
 
+  if(userArray.length === 1) {
+    userArray = [...namesArray]
+    console.log("hello")
+  } else {
+    userArray.splice(index, 1);
+  }
+  // console.log(userArray.length)
+  // console.log(index)
+  console.log(userArray)
+  console.log(randomUser)
+  
+}
 function seperateName() {
   allUsers.forEach(user => {
     const nameNode = (`${capsName(user.first_name, user.last_name)}`)
+    namesArray.push(nameNode)
     addToPage(nameNode)
     userArray.push(nameNode)
     return nameNode
     // console.log(nameNode)
   })
-    
-    
+  
+  
 }
 
+
 async function main() {
-    const data = await fetchUrl()
-    data.forEach(user => {
-      allUsers.push(user)
-    })
-    seperateName(allUsers)
-    // weight(allUsers)
-    // console.log(allUsers)
-
-
-    // const userFrag = new DocumentFragment();
-    // console.log(data)
-
-    // userFrag.appendChild(nameNode)
-    // usersArray(nameNode)
-    // return nameNode
-  
-    return data
-  // parentEl.appendChild(userFrag)
+  const data = await fetchUrl()
+  data.forEach(user => {
+    allUsers.push(user)
+  })
+  seperateName(allUsers)
+  return data
 }
 
 main()
-
-// console.log(document.getElementsByClassName())
-
-// async main() -> control flow of app
- // getData()
- // queryDomElements
- // createElements
- // format elements -> separateNames(first, last) => formatted string : 
- // appendElements
