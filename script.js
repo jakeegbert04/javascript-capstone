@@ -1,4 +1,8 @@
 const login = {email: "jake@devpipeline.com",password: "little"}
+const allUsers = []
+const namesArray = []
+let weightArray = []
+let userArray =[]
 
 function fetchUrl() {
   try{
@@ -17,8 +21,7 @@ function fetchUrl() {
     console.error(error)
   }
 }
-const allUsers = []
-const namesArray = []
+
 // console.log(fetchUrl())
 
 
@@ -26,7 +29,7 @@ function capsName(firstName, lastName) {
    return firstName[0].toUpperCase() + firstName.slice(1)+ ` ` + lastName[0].toUpperCase()
 }
 
-let weightArray = []
+
 
 function addToPage(fullName) {
   const nameNode = document.createTextNode(`${fullName} : `)
@@ -67,49 +70,42 @@ buttonAdd.addEventListener("click", function(e) {
   weightArray.push(fullName)
   console.log(weightArray) 
 })
-  const decreaseNum = buttonMinus.addEventListener("click", function(e) {
-    const weight = e.target.parentElement.previousElementSibling.querySelector("span").innerText
-    console.dir(e.target)
-    if(weight === "0"){
-      e.target.disabled = true
-    } else {
-      // e.target.disabled = false
-      e.target.parentElement.parentElement.firstChild.firstElementChild.innerText--
-      
-      const index = weightArray.indexOf(fullName);
-      if (index > -1) {
-      weightArray.splice(index, 1);
-      console.log(weightArray)
-      }
+buttonMinus.addEventListener("click", function(e) {
+  const weight = e.target.parentElement.previousElementSibling.querySelector("span").innerText
+  console.dir(e.target)
+  if(weight === "0"){
+    e.target.disabled = true
+  } else {
+    // e.target.disabled = false
+    e.target.parentElement.parentElement.firstChild.firstElementChild.innerText--
+    
+    const index = weightArray.indexOf(fullName);
+    if (index > -1) {
+    weightArray.splice(index, 1);
+    console.log(weightArray)
     }
+  }
    
     
   }
 )}
-let userArray =[]
 
-// console.log(userArray)
 
 async function randomName(){
   const randomIndex = Math.floor(Math.random() * userArray.length);
   const randomUser = userArray[randomIndex]
   const index = userArray.indexOf(randomUser);
-  const nameTextNone = document.createTextNode(randomUser)
   removeDisplay()
   await timer()
   document.getElementsByClassName("display")[0].innerText = randomUser
   addDisplay()
   
-
   if(userArray.length === 1) {
     userArray = [...weightArray]
-    // console.log("hello")
   } else {
     userArray.splice(index, 1);
   }
   document.getElementsByClassName("display")
-  // console.log(userArray.length)
-  // console.log(index)
   console.log(userArray)
   console.log(randomUser)
 }
@@ -120,6 +116,7 @@ function removeDisplay() {
   document.getElementsByClassName("random-button")[0].style.display = "none";
   // displayDiv.replaceWith(spinDiv)
 }
+
 function addDisplay() {
   document.getElementsByClassName("display")[0].style.display = "block";
   document.getElementsByClassName("loader")[0].style.display = "none";
@@ -137,9 +134,6 @@ function timer() {
   })
 }
 
-
-// changeDisplay()
-
 function seperateName() {
   allUsers.forEach(user => {
     const nameNode = (`${capsName(user.first_name, user.last_name)}`)
@@ -147,16 +141,11 @@ function seperateName() {
     addToPage(nameNode)
     userArray.push(nameNode)
     return nameNode
-    // console.log(nameNode)
   })
-  
-  
 }
-
 
 async function main() {
   const data = await fetchUrl()
-  // console.log(data["users"])
   data["users"].forEach(user => {
     allUsers.push(user)
   })
