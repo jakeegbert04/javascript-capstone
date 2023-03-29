@@ -42,6 +42,9 @@
     transform: rotate(360deg);
   }
 }
+.main-container .middle-section .random-button {
+  display: block;
+}
 .main-container .middle-section .random-button button {
   padding: 30px 180px;
   font-size: 20px;

@@ -9,6 +9,7 @@ function fetchUrl() {
    const responce = fetch("https://devpipeline-mock-api.onrender.com/api/auth/login", {
     credentials: "same-origin",
     method: "post",
+    mode: "cors",
     body: JSON.stringify(login),
     headers: {
       "content-type" : "application/json"
@@ -22,14 +23,9 @@ function fetchUrl() {
   }
 }
 
-// console.log(fetchUrl())
-
-
 function capsName(firstName, lastName) {
    return firstName[0].toUpperCase() + firstName.slice(1)+ ` ` + lastName[0].toUpperCase()
 }
-
-
 
 function addToPage(fullName) {
   const nameNode = document.createTextNode(`${fullName} : `)
@@ -85,36 +81,33 @@ buttonMinus.addEventListener("click", function(e) {
     console.log(weightArray)
     }
   }
-   
-    
   }
 )}
-
 
 async function randomName(){
   const randomIndex = Math.floor(Math.random() * userArray.length);
   const randomUser = userArray[randomIndex]
   const index = userArray.indexOf(randomUser);
+  
+  
   removeDisplay()
   await timer()
   document.getElementsByClassName("display")[0].innerText = randomUser
   addDisplay()
-  
+  const randoBtn = document.getElementsByClassName("display")[0].innerText
+    
   if(userArray.length === 1) {
     userArray = [...weightArray]
   } else {
     userArray.splice(index, 1);
   }
   document.getElementsByClassName("display")
-  console.log(userArray)
-  console.log(randomUser)
 }
 
 function removeDisplay() {
   document.getElementsByClassName("display")[0].style.display = "none";
   document.getElementsByClassName("loader")[0].style.display = "block";
   document.getElementsByClassName("random-button")[0].style.display = "none";
-  // displayDiv.replaceWith(spinDiv)
 }
 
 function addDisplay() {
