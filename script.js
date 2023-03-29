@@ -107,7 +107,6 @@ function addDisplay() {
   document.getElementsByClassName("display")[0].style.display = "block";
   document.getElementsByClassName("loader")[0].style.display = "none";
   document.getElementsByClassName("random-button")[0].style.display = "block";
-
 }
 
 function timer() {
@@ -119,9 +118,9 @@ function timer() {
 }
 
 async function randomName(){
-  const randomIndex = Math.floor(Math.random() * userArray.length);
-  const randomUser = userArray[randomIndex]
-  const index = userArray.indexOf(randomUser);
+  const randomIndex = Math.floor(Math.random() * weightArray.length);
+  const randomUser = weightArray[randomIndex]
+  const index = weightArray.indexOf(randomUser);
   
   
   removeDisplay()
@@ -129,10 +128,10 @@ async function randomName(){
   document.getElementsByClassName("display")[0].innerText = randomUser
   addDisplay()
     
-  if(userArray.length === 1) {
+  if(weightArray.length === 1) {
     userArray = [...weightArray]
   } else {
-    userArray.splice(index, 1);
+    weightArray.splice(index, 1);
   }
   document.getElementsByClassName("display")
 }
