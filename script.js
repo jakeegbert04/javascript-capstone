@@ -26,6 +26,25 @@ function capsName(firstName, lastName) {
    return firstName[0].toUpperCase() + firstName.slice(1)+ ` ` + lastName[0].toUpperCase()
 }
 
+function seperateName() {
+  allUsers.forEach(user => {
+    const nameNode = (`${capsName(user.first_name, user.last_name)}`)
+    namesArray.push(nameNode)
+    addToPage(nameNode)
+    userArray.push(nameNode)
+    return nameNode
+  })
+}
+
+async function main() {
+  const data = await fetchUrl()
+  data["users"].forEach(user => {
+    allUsers.push(user)
+  })
+  seperateName(allUsers)
+  return data
+}
+
 function addToPage(fullName) {
   const nameNode = document.createTextNode(`${fullName} : `)
   const weightNum = document.createTextNode(1)
@@ -82,25 +101,6 @@ buttonMinus.addEventListener("click", function(e) {
   }
 )}
 
-async function randomName(){
-  const randomIndex = Math.floor(Math.random() * userArray.length);
-  const randomUser = userArray[randomIndex]
-  const index = userArray.indexOf(randomUser);
-  
-  
-  removeDisplay()
-  await timer()
-  document.getElementsByClassName("display")[0].innerText = randomUser
-  addDisplay()
-    
-  if(userArray.length === 1) {
-    userArray = [...weightArray]
-  } else {
-    userArray.splice(index, 1);
-  }
-  document.getElementsByClassName("display")
-}
-
 function removeDisplay() {
   document.getElementsByClassName("display")[0].style.display = "none";
   document.getElementsByClassName("loader")[0].style.display = "block";
@@ -124,23 +124,23 @@ function timer() {
   })
 }
 
-function seperateName() {
-  allUsers.forEach(user => {
-    const nameNode = (`${capsName(user.first_name, user.last_name)}`)
-    namesArray.push(nameNode)
-    addToPage(nameNode)
-    userArray.push(nameNode)
-    return nameNode
-  })
-}
-
-async function main() {
-  const data = await fetchUrl()
-  data["users"].forEach(user => {
-    allUsers.push(user)
-  })
-  seperateName(allUsers)
-  return data
+async function randomName(){
+  const randomIndex = Math.floor(Math.random() * userArray.length);
+  const randomUser = userArray[randomIndex]
+  const index = userArray.indexOf(randomUser);
+  
+  
+  removeDisplay()
+  await timer()
+  document.getElementsByClassName("display")[0].innerText = randomUser
+  addDisplay()
+    
+  if(userArray.length === 1) {
+    userArray = [...weightArray]
+  } else {
+    userArray.splice(index, 1);
+  }
+  document.getElementsByClassName("display")
 }
 
 main()
