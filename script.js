@@ -8,7 +8,6 @@ function fetchUrl() {
     body: JSON.stringify(login),
     headers: {
       "content-type" : "application/json"
-
   }
    })
    .then( res => res.json())
@@ -44,8 +43,6 @@ function addToPage(fullName) {
   
   weightArray = [...namesArray]
   
-
-
   nameDiv.appendChild(namePara)
   namePara.appendChild(nameNode)
   namePara.append(weightSpan)
@@ -54,25 +51,22 @@ function addToPage(fullName) {
   nameDiv.classList.add("all-users")
   users.appendChild(nameDiv)
 
-
-
   nameDiv.appendChild(buttonDiv)
   buttonDiv.appendChild(buttonAdd)
   buttonDiv.appendChild(buttonMinus)
   buttonAdd.appendChild(add)
   buttonAdd.classList.add("click-add")
-  // buttonAdd.onclick = update
   buttonMinus.appendChild(minus)
   users.appendChild(nameDiv)
   
-  const allUsersDiv = document.getElementsByClassName("all-users")
+document.getElementsByClassName("all-users")
   
-  const updateNum = buttonAdd.addEventListener("click", function(e) {
-      e.target.parentElement.lastChild.disabled = false
-      e.target.parentElement.parentElement.firstChild.firstElementChild.innerText++
-      weightArray.push(fullName)
-      console.log(weightArray) 
-    })
+buttonAdd.addEventListener("click", function(e) {
+  e.target.parentElement.lastChild.disabled = false
+  e.target.parentElement.parentElement.firstChild.firstElementChild.innerText++
+  weightArray.push(fullName)
+  console.log(weightArray) 
+})
   const decreaseNum = buttonMinus.addEventListener("click", function(e) {
     const weight = e.target.parentElement.previousElementSibling.querySelector("span").innerText
     console.dir(e.target)
@@ -123,11 +117,14 @@ async function randomName(){
 function removeDisplay() {
   document.getElementsByClassName("display")[0].style.display = "none";
   document.getElementsByClassName("loader")[0].style.display = "block";
+  document.getElementsByClassName("random-button")[0].style.display = "none";
   // displayDiv.replaceWith(spinDiv)
 }
 function addDisplay() {
   document.getElementsByClassName("display")[0].style.display = "block";
   document.getElementsByClassName("loader")[0].style.display = "none";
+  document.getElementsByClassName("random-button")[0].style.display = "block";
+
 }
 
 function timer() {
@@ -139,6 +136,7 @@ function timer() {
     }, 1000);
   })
 }
+
 
 // changeDisplay()
 

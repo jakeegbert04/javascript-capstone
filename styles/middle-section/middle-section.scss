@@ -33,6 +33,7 @@
       100% { transform: rotate(360deg); }
     }
     .random-button {
+      display: block;
       button {
         padding: 30px 180px;
         font-size: 20px;
