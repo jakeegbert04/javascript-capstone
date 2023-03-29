@@ -15,7 +15,6 @@ function fetchUrl() {
   }
    })
    .then( res => res.json())
-  //  console.log("DATA: ", responce)
    return responce
   } catch (error) {
     console.error(error)
@@ -82,11 +81,9 @@ buttonAdd.addEventListener("click", function(e) {
   e.target.parentElement.lastChild.disabled = false
   e.target.parentElement.parentElement.firstChild.firstElementChild.innerText++
   weightArray.push(fullName)
-  console.log(weightArray) 
 })
 buttonMinus.addEventListener("click", function(e) {
   const weight = e.target.parentElement.previousElementSibling.querySelector("span").innerText
-  console.dir(e.target)
   if(weight === "0"){
     e.target.disabled = true
   } else {
@@ -95,7 +92,6 @@ buttonMinus.addEventListener("click", function(e) {
     const index = weightArray.indexOf(fullName);
     if (index > -1) {
     weightArray.splice(index, 1);
-    console.log(weightArray)
     }
   }
   }
@@ -115,11 +111,9 @@ function addDisplay() {
 }
 
 function timer() {
-  console.log("starting slow promise");
   return new Promise(resolve => {
     setTimeout(function() {
       resolve("slow");
-      console.log("slow promise is done");
     }, 1000);
   })
 }
