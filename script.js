@@ -12,6 +12,7 @@ function fetchUrl() {
     mode: "cors",
     body: JSON.stringify(login),
     headers: {
+      "Access-Control-Allow-Origin": "https://devpipeline-mock-api.onrender.com",
       "content-type" : "application/json"
   }
    })
